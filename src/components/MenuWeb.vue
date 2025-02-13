@@ -1,27 +1,39 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
+import { useRoute } from "vue-router";
 
-const showMenu = ref(false);
-// const showLanguageDropdown = ref(false);
-const activeMenuItem = ref("O nás");
+const isMenuOpen = ref(false);
+const activeMenuIndex = ref(0);
+const route = useRoute();
+
+const menuItems = [
+  { name: "Domov", path: "/" },
+  { name: "Produkty", path: "/products" },
+  { name: "Služby", path: "/services" },
+  { name: "Kontakt", path: "/contact" },
+];
 
 const toggleMenu = () => {
-  showMenu.value = !showMenu.value;
-  document.body.style.overflow = showMenu.value ? "hidden" : ""; // Disable scrolling when menu is open
+  isMenuOpen.value = !isMenuOpen.value;
+  document.body.style.overflow = isMenuOpen.value ? "hidden" : "";
 };
 
-// const toggleLanguageDropdown = () => {
-//   showLanguageDropdown.value = !showLanguageDropdown.value;
-// };
-
-const setActiveMenuItem = (item) => {
-  activeMenuItem.value = item;
+const setActiveMenuItem = (index, closeMenu = false) => {
+  activeMenuIndex.value = index;
+  if (closeMenu) toggleMenu();
 };
 
-const setActiveMenuMobilItem = (item) => {
-  activeMenuItem.value = item;
-  toggleMenu(); // Close menu after selecting an item
-};
+// Watch for route changes and update active menu index accordingly
+watch(
+  () => route.path,
+  (newPath) => {
+    const index = menuItems.findIndex((item) => item.path === newPath);
+    if (index !== -1) {
+      activeMenuIndex.value = index;
+    }
+  },
+  { immediate: true }
+);
 </script>
 
 <template>
@@ -31,49 +43,19 @@ const setActiveMenuMobilItem = (item) => {
       <img src="../assets/logo.png" alt="Logo" />
     </router-link>
 
-    <!-- Menu Links -->
-    <div v-if="!showMenu" class="menu-links">
+    <!-- Desktop Menu Links -->
+    <nav v-if="!isMenuOpen" class="menu-links">
       <router-link
-        to="/"
+        v-for="(item, index) in menuItems"
+        :key="index"
+        :to="item.path"
         class="menuLink"
-        :class="{ active: activeMenuItem === 'Domov' }"
-        @click="setActiveMenuItem('Domov')"
+        :class="{ active: activeMenuIndex === index }"
+        @click="setActiveMenuItem(index)"
       >
-        Domov
+        {{ item.name }}
       </router-link>
-      <!--      <router-link-->
-      <!--        to="/"-->
-      <!--        class="menuLink"-->
-      <!--        :class="{ active: activeMenuItem === 'O nás' }"-->
-      <!--        @click="setActiveMenuItem('O nás')"-->
-      <!--      >-->
-      <!--        O nás-->
-      <!--      </router-link>-->
-      <router-link
-        to="/products"
-        class="menuLink"
-        :class="{ active: activeMenuItem === 'Produkty' }"
-        @click="setActiveMenuItem('Produkty')"
-      >
-        Produkty
-      </router-link>
-      <router-link
-        to="/services"
-        class="menuLink"
-        :class="{ active: activeMenuItem === 'Služby' }"
-        @click="setActiveMenuItem('Služby')"
-      >
-        Služby
-      </router-link>
-      <router-link
-        to="/contact"
-        class="menuLink"
-        :class="{ active: activeMenuItem === 'Kontakt' }"
-        @click="setActiveMenuItem('Kontakt')"
-      >
-        Kontakt
-      </router-link>
-    </div>
+    </nav>
 
     <!-- Language Selection -->
     <div class="localization">
@@ -90,68 +72,41 @@ const setActiveMenuMobilItem = (item) => {
     <!-- Mobile Menu Button -->
     <button class="menu-button" @click="toggleMenu">☰</button>
 
-    <!-- Fullscreen Mobile Menu -->
-    <div v-if="showMenu" class="mobile-menu">
+    <!-- Mobile Menu -->
+    <div v-if="isMenuOpen" class="mobile-menu">
       <button class="close-button" @click="toggleMenu">✕</button>
       <router-link
-        to="/"
+        v-for="(item, index) in menuItems"
+        :key="index"
+        :to="item.path"
         class="menuLink"
-        :class="{ active: activeMenuItem === 'O nás' }"
-        @click="setActiveMenuMobilItem('O nás')"
+        :class="{ active: activeMenuIndex === index }"
+        @click="setActiveMenuItem(index, true)"
       >
-        O nás
-      </router-link>
-      <router-link
-        to="/products"
-        class="menuLink"
-        :class="{ active: activeMenuItem === 'Produkty' }"
-        @click="setActiveMenuMobilItem('Produkty')"
-      >
-        Produkty
-      </router-link>
-      <router-link
-        to="/"
-        class="menuLink"
-        :class="{ active: activeMenuItem === 'Služby' }"
-        @click="setActiveMenuMobilItem('Služby')"
-      >
-        Služby
-      </router-link>
-      <router-link
-        to="/"
-        class="menuLink"
-        :class="{ active: activeMenuItem === 'Kontakt' }"
-        @click="setActiveMenuMobilItem('Kontakt')"
-      >
-        Kontakt
+        {{ item.name }}
       </router-link>
     </div>
   </div>
 </template>
 
 <style scoped>
-/* Main Menu */
 .menu {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: white; /* White background */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Shadow */
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 10px 20px;
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
-/* Logo */
 .logo img {
   height: 50px;
-  width: auto;
   cursor: pointer;
-  margin-right: -90px;
 }
 
-/* Menu Links */
 .menu-links {
   display: flex;
   gap: 40px;
@@ -160,9 +115,9 @@ const setActiveMenuMobilItem = (item) => {
 .menuLink {
   font-size: 18px;
   font-weight: 600;
-  color: #252636; /* Text color */
+  color: #252636;
   text-decoration: none;
-  transition: transform 0.3s ease; /* Hover effect */
+  transition: transform 0.3s ease;
 }
 
 .menuLink:hover {
@@ -170,7 +125,49 @@ const setActiveMenuMobilItem = (item) => {
 }
 
 .menuLink.active {
-  color: #ffc300; /* Highlight active menu item */
+  color: #ffc300;
+}
+
+.menu-button {
+  display: none;
+  background: none;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  z-index: 1000;
+}
+
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .menu-links {
+    display: none;
+  }
+  .menu-button {
+    display: block;
+  }
 }
 
 /* Localization Dropdown */
@@ -228,80 +225,5 @@ const setActiveMenuMobilItem = (item) => {
 
 .dropdown-item:hover {
   background-color: #f4f4f4;
-}
-
-/* Mobile Menu Button */
-.menu-button {
-  display: none;
-  background-color: transparent;
-  font-size: 24px;
-  border: none;
-  cursor: pointer;
-}
-
-.menu-button:hover {
-  transform: scale(1.2);
-}
-
-/* Mobile Fullscreen Menu */
-.mobile-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  z-index: 1000;
-  overflow: hidden; /* Prevent scrolling */
-}
-
-.close-button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: transparent;
-  font-size: 24px;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.close-button:hover {
-  transform: scale(1.2);
-}
-
-.mobile-menu .menuLink {
-  font-size: 24px;
-  color: #252636;
-  text-decoration: none;
-  transition: transform 0.3s ease;
-}
-
-.mobile-menu .menuLink:hover {
-  transform: scale(1.1);
-}
-
-.mobile-menu .menuLink.active {
-  color: #ffc300; /* Highlight active menu item */
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-  .menu-links {
-    display: none;
-  }
-
-  .menu-button {
-    display: block;
-  }
-
-  .localization {
-    display: none;
-  }
 }
 </style>

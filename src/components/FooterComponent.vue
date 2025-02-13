@@ -8,17 +8,16 @@ const currentYear = new Date().getFullYear();
       <div class="footer-column">
         <ul>
           <li><a href="/">Domov</a></li>
-          <!--          <li><a href="/onas">O nás</a></li>-->
-          <li><a href="/sluzby">Služby</a></li>
-          <li><a href="/produkty">Produkty</a></li>
-          <li><a href="/kontakt">Kontakt</a></li>
+          <li><a href="/products">Produkty</a></li>
+          <li><a href="/services">Služby</a></li>
+          <li><a href="/contact">Kontakt</a></li>
         </ul>
       </div>
       <div class="footer-column">
         <p>INHALL s.r.o.</p>
-        <p>Adresa: Príkladná 123, 123 45 Bratislava</p>
-        <p>Telefón: +421 123 456 789</p>
-        <p>Email: info@inhall.sk</p>
+        <p>Adresa: Centrum 26, 017 01 Považská Bystrica</p>
+        <p>Telefón: +421 902 672 525, +421 944 224 282</p>
+        <p>Email: inhall@inhall.sk</p>
       </div>
       <div class="footer-column">
         <ul>
