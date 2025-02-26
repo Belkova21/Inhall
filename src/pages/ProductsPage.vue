@@ -1,8 +1,10 @@
 <template>
   <div class="image-container">
-    <img src="../assets/ProductsMain.png" alt="Inhall" class="main-img" />
+    <img :src="MainPicture" alt="Inhall" class="main-img" />
     <div class="main-title">
-      <button class="cta-button">Získajte cenovú ponuku</button>
+      <router-link to="/contact" class="cta-button">
+        Získajte cenovú ponuku
+      </router-link>
     </div>
   </div>
 
@@ -33,10 +35,11 @@
 
 <script setup>
 import { h, ref } from "vue";
-import sdkVstavok from "../assets/hladky.jpg";
-import glassVstavok from "../assets/skelenny.jpg";
-import variabilVstavok from "../assets/oddeleny.jpg";
-import DoubleVstavok from "../assets/dvojposchodovy.jpg";
+import MainPicture from "@/assets/ProductsMain.png";
+import sdkVstavok from "@/assets/hladky.jpg";
+import glassVstavok from "@/assets/skelenny.jpg";
+import variabilVstavok from "@/assets/oddeleny.jpg";
+import DoubleVstavok from "@/assets/dvojposchodovy.jpg";
 
 const services = ref([
   {
@@ -46,7 +49,7 @@ const services = ref([
         h(
           "p",
           "SDK vstavok patrí medzi naše najpredávanejšie produkty a je u zákazníkov mimoriadne obľúbený. Ide o vstavok vyrobený zo sadrokartónu v kombinácii s CW a UW profilmi, ktoré zaručujú vysokú pevnosť, odolnosť a dlhú životnosť. " +
-            "Je ideálnou voľbou pre moderné interiéry, kde je kladený dôraz na funkčnosť a estetiku. Jednoduchá montáž a všestranné využitie ho predurčujú na použitie v domácnostiach, kanceláriách, ale aj v komerčných priestoroch."
+            "Je ideálnou voľbou pre moderné priestory, kde je kladený dôraz na funkčnosť a efektivitu. Vďaka jednoduchej montáži a všestrannému využitiu je vhodný najmä pre haly alebo logistické centrá."
         ),
         h("p", "SDK vstavok ponúka: "),
         h("ul", [
@@ -70,7 +73,7 @@ const services = ref([
         h(
           "p",
           "GLASS Vstávok predstavuje dokonalé spojenie hliníkových profilov a sklenenej výplne, vďaka čomu ponúka moderný, elegantný a nadčasový vzhľad. Tento produkt je ideálny pre tých, ktorí hľadajú svetlé, priestranné a vizuálne atraktívne riešenie do svojich interiérov. " +
-            "Je skvelou voľbou pre kancelárie, obchodné priestory, ale aj moderné domácnosti, kde je dôležité zachovať otvorený priestor, zároveň však oddeliť jednotlivé zóny."
+            "Je skvelou voľbou pre moderné kancelárie a obchodné priestory, kde je dôležité zachovať otvorený priestor, zároveň však oddeliť jednotlivé zóny."
         ),
         h("p", "Hlavné prednosti GLASS Vstávku:"),
         h("ul", [
@@ -97,7 +100,7 @@ const services = ref([
         h(
           "p",
           "VARIABIL vstavok je skutočne všestranný produkt, ktorý kombinuje hliníkové profily s pevnou výplňou. Tento vstavok je navrhnutý tak, aby ponúkol maximálnu flexibilitu a funkčnosť, pričom zároveň zaisťuje moderný a elegantný vzhľad. " +
-            "Je ideálny pre kancelárie, skladové priestory, komerčné prevádzky, ale aj pre domácnosti, kde je potrebné dosiahnuť diskrétnosť alebo oddelenie priestorov. "
+            "Je ideálny pre kancelárie, skladové priestory alebo komerčné prevádzky, kde je potrebné dosiahnuť diskrétnosť alebo oddelenie priestorov. "
         ),
         h("p", "Hlavné výhody VARIABIL Vstávku:"),
         h("ul", [

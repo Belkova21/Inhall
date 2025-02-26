@@ -1,12 +1,16 @@
 <template>
   <div class="page">
     <div class="image-container">
-      <img src="../assets/option1.png" alt="Inhall" class="main-img" />
+      <img
+        :src="require('@/assets/option1.png')"
+        alt="Inhall"
+        class="main-img"
+      />
       <div class="main-title">
         <h1>Využívame priestor efektívne</h1>
-        <button class="cta-button" @click="showDialog = true">
+        <router-link to="/contact" class="cta-button">
           Získajte cenovú ponuku
-        </button>
+        </router-link>
       </div>
     </div>
 
@@ -14,7 +18,7 @@
       <a href="/products" class="column">
         <div class="column-content">
           <h2>Vstavky do hál</h2>
-          <img src="../assets/vstavky.png" alt="Inhall" />
+          <img :src="require('@/assets/vstavky.png')" alt="Inhall" />
           <p>
             Oddelené priestory v hale umožňujú efektívnejšie využitie dostupného
             priestoru. Vytvorte ideálne pracovné prostredie pre vaše potreby.
@@ -27,7 +31,7 @@
       <a href="/services" class="column">
         <div class="column-content">
           <h2>Interiérové priečky</h2>
-          <img src="../assets/zariadenie.png" alt="Inhall" />
+          <img :src="require('@/assets/zariadenie.png')" alt="Inhall" />
           <p>
             Pomáhame vám vytvoriť moderné a funkčné interiérové priečky podľa
             vašich predstáv, od návrhu až po realizáciu.
@@ -40,7 +44,7 @@
       <a href="/services" class="column">
         <div class="column-content">
           <h2>Zariadenia priestorov</h2>
-          <img src="../assets/kancelaria.png" alt="Inhall" />
+          <img :src="require('@/assets/kancelaria.png')" alt="Inhall" />
           <p>
             Kompletné zariadenia priestorov pre profesionálny vzhľad a maximálnu
             funkčnosť. Zmodernizujte váš priestor s našou pomocou.

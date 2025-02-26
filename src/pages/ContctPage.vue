@@ -21,21 +21,21 @@
         ></iframe>
       </div>
     </div>
-    <div class="contact-form-container">
-      <h2 class="form-title">Napíšte nám</h2>
-      <form class="contact-form">
-        <label for="name">Meno</label>
-        <input type="text" id="name" name="name" required />
+    <!--    <div class="contact-form-container">-->
+    <!--      <h2 class="form-title">Napíšte nám</h2>-->
+    <!--      <form class="contact-form">-->
+    <!--        <label for="name">Meno</label>-->
+    <!--        <input type="text" id="name" name="name" required />-->
 
-        <label for="email">E-mail</label>
-        <input type="email" id="email" name="email" required />
+    <!--        <label for="email">E-mail</label>-->
+    <!--        <input type="email" id="email" name="email" required />-->
 
-        <label for="message">Správa</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
+    <!--        <label for="message">Správa</label>-->
+    <!--        <textarea id="message" name="message" rows="5" required></textarea>-->
 
-        <button type="submit" class="info-button">Odoslať</button>
-      </form>
-    </div>
+    <!--        <button type="submit" class="info-button">Odoslať</button>-->
+    <!--      </form>-->
+    <!--    </div>-->
   </div>
 </template>
 

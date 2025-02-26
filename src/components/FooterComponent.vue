@@ -21,9 +21,20 @@ const currentYear = new Date().getFullYear();
       </div>
       <div class="footer-column">
         <ul>
-          <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
-          <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
-          <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+          <li>
+            <a
+              href="https://www.facebook.com/profile.php?id=100090268502100"
+              target="_blank"
+              >Facebook</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.instagram.com/inhall_implement/"
+              target="_blank"
+              >Instagram</a
+            >
+          </li>
         </ul>
       </div>
     </div>

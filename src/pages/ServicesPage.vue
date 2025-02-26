@@ -328,10 +328,10 @@
 </template>
 
 <script setup>
-import graphicDesign from "../assets/navrh.png";
-import realization from "../assets/Realizacia.png";
-import interiorDesign from "../assets/kancelaria.png";
-import interiosSeparators from "../assets/zariadenie.png";
+import graphicDesign from "@/assets/navrh.png";
+import realization from "@/assets/Realizacia.png";
+import interiorDesign from "@/assets/kancelaria.png";
+import interiosSeparators from "@/assets/zariadenie.png";
 const services = [
   {
     title: "Grafické návrhy",
